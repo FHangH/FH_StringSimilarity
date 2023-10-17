@@ -92,21 +92,21 @@ bool UFuncLib_StringSimilarity::IsChinesePunctuationOrSpace(const wchar_t C)
 
 FString UFuncLib_StringSimilarity::RemoveSpacesAndSymbolsByString(const FString& Str)
 {
-	std::wstring ReadyStr = TCHAR_TO_WCHAR(*Str);
-	ReadyStr.erase(
+	std::wstring NewStr = TCHAR_TO_WCHAR(*Str);
+	NewStr.erase(
 		std::remove_if(
-			ReadyStr.begin(), ReadyStr.end(), static_cast<int(*)(int)>(&ispunct)),
-			ReadyStr.end()
+			NewStr.begin(), NewStr.end(), static_cast<int(*)(int)>(&ispunct)),
+			NewStr.end()
 	);
-	ReadyStr.erase(
+	NewStr.erase(
 		std::remove_if(
-			ReadyStr.begin(), ReadyStr.end(), static_cast<int(*)(int)>(&isspace)),
-			ReadyStr.end()
+			NewStr.begin(), NewStr.end(), static_cast<int(*)(int)>(&isspace)),
+			NewStr.end()
 	);
-	ReadyStr.erase(
+	NewStr.erase(
 		std::remove_if(
-			ReadyStr.begin(), ReadyStr.end(), IsChinesePunctuationOrSpace),
-			ReadyStr.end()
+			NewStr.begin(), NewStr.end(), IsChinesePunctuationOrSpace),
+			NewStr.end()
 	);
-	return WCHAR_TO_TCHAR(ReadyStr.c_str());
+	return WCHAR_TO_TCHAR(NewStr.c_str());
 }
