@@ -67,6 +67,8 @@ float UFuncLib_StringSimilarity::StringSimilarity(const ESimilarityType EST, con
 
 FString UFuncLib_StringSimilarity::StrArraySimilarity(const ESimilarityType EST, const TArray<FString>& CompareStrArr, const FString& NewStr, float& Similarity)
 {
+	if (CompareStrArr.Num() == 0) return "";
+	
 	int Index = 0;
 	float Temp = 0.f;
 	for (int i = 0; i < CompareStrArr.Num(); ++i)
