@@ -85,9 +85,14 @@ FString UFuncLib_StringSimilarity::StrArraySimilarity(const ESimilarityType EST,
 
 bool UFuncLib_StringSimilarity::IsChinesePunctuationOrSpace(const wchar_t C)
 {
-	if (C == L'，' || C == L'。' || C == L'！' || C == L'？' || C == L' ' || C == L'：')
+	const auto Punctuation[] = {
+		L'。', L'，', L'、', L'；', L'：', L'‘', L'’', L'“', L'”',
+		L'（', L'）', L'【', L'】', L'《', L'》', L'—', L'·', L'…',
+		L'！', L' '};
+
+	for (const auto& item : Punctuation)
 	{
-		return true;
+		if (C == item) return true;
 	}
 	return false;
 }
