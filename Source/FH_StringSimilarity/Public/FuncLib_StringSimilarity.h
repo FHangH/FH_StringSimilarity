@@ -31,4 +31,7 @@ public:
 	
 	UFUNCTION(BlueprintPure, Category="FH|Similarity", meta=(ToolTip="删除字符串中的空格和标点符号"))
 	static FString RemoveSpacesAndSymbolsByString(const FString& Str);
+
+	UFUNCTION(BlueprintPure, Category="FH|Similarity", meta=(ToolTip="字符串转float数组, 支持样式："[1.0, 2.0, 3.0]", [1.0, 2.0, 3.0]"))
+	static void StringToFloatArray(const FString& str, bool& IsSucceed, TArray<float>& outArray);
 };
