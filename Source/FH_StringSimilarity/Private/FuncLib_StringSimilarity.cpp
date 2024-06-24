@@ -117,3 +117,35 @@ FString UFuncLib_StringSimilarity::RemoveSpacesAndSymbolsByString(const FString&
 	);
 	return WCHAR_TO_TCHAR(NewStr.c_str());
 }
+
+void UFuncLib_StringSimilarity::StringToFloatArray(const FString& str, bool& IsSucceed, TArray<float>& outArray)
+{
+	// 确保输入字符串不为空并且长度大于2（至少包含两个方括号）
+	if (str.Len() > 2)
+	{
+		// 去掉字符串的方括号
+		FString CleanStr = str;
+
+		// 修改这段，可以适应更多格式的字符串，用于转成float数组
+		CleanStr.RemoveFromStart(TEXT("\""));
+		CleanStr.RemoveFromEnd(TEXT("\""));
+		CleanStr.RemoveFromStart(TEXT("["));
+		CleanStr.RemoveFromEnd(TEXT("]"));
+
+		// 分割字符串
+		TArray<FString> StringArray;
+		CleanStr.ParseIntoArray(StringArray, TEXT(","), true);
+
+		// 将字符串数组中的每个元素转换为浮点数并添加到输出数组中
+		for (FString& Elem : StringArray)
+		{
+			// 去除字符串周围的空格
+			Elem = Elem.TrimStartAndEnd();
+			outArray.Add(FCString::Atof(*Elem));
+		}
+		IsSucceed = true;
+		return;
+	}
+
+	IsSucceed = false;
+}
